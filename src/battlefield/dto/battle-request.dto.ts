@@ -6,7 +6,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class BattleRequestDto {
   @ApiProperty({
     type: PlayerActions,
-    description: 'Player 1',
+    description: 'This object is a referece of PlayerActions',
     example: {
       movimientos: ['SDD', 'DSD', 'SA', 'DSD'],
       golpes: ['K', 'P', 'K', 'P'],
@@ -18,7 +18,7 @@ export class BattleRequestDto {
 
   @ApiProperty({
     type: PlayerActions,
-    description: 'Player 2',
+    description: 'This object is a referece of PlayerActions',
     example: {
       movimientos: ['DSD', 'WSAW', 'ASA', '', 'ASA', 'SA'],
       golpes: ['P', 'K', 'K', 'K', 'P', 'k'],

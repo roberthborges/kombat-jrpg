@@ -4,6 +4,7 @@ import { BattleResponseDto } from './dto/battle-response.dto';
 import { BattleRequestDto } from './dto/battle-request.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BadRequestErrorDto } from './../common/dto/bad-request-error.dto';
+import { InternalServerErrorDto } from './../common/dto/internal-server-error.dto';
 
 @ApiTags('Battlefield')
 @Controller('battlefield')
@@ -17,8 +18,13 @@ export class BattlefieldController {
   })
   @ApiResponse({
     status: 400,
-    description: 'Bad request',
+    description: 'An error trace is displayed',
     type: BadRequestErrorDto,
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'An error trace is displayed',
+    type: InternalServerErrorDto,
   })
   @Post()
   @HttpCode(HttpStatus.OK)

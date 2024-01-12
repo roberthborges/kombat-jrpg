@@ -6,7 +6,7 @@ export class PlayerActions {
     type: 'array',
     maxLength: 5,
     description:
-      'Listado de movimientos del jugador. Cada movimiento dentro del listado puede tener un maximo de 5 digitos e incluso puede estar vacio',
+      'Listado de movimientos del jugador. Cada movimiento puede tener un maximo de 5 digitos e incluso puede estar vacio',
     example: ['SDD', 'DSD', 'SA', 'DSD'],
   })
   @IsString({ each: true })
@@ -19,7 +19,7 @@ export class PlayerActions {
     type: 'array',
     maxLength: 1,
     description:
-      'Listado de golpes del jugador. Cada golpe dentro del listado puede tener un maximo de 1 digito e incluso puede estar vacio',
+      'Listado de golpes del jugador. Cada golpe puede tener un maximo de 1 digito e incluso puede estar vacio',
     example: ['K', 'P', 'K', 'P'],
   })
   @IsString({ each: true })
