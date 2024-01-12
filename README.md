@@ -20,12 +20,20 @@ Por defecto, el servicio desplegara en el puerto `3000`, sin embargo, esto puede
 
 ## Instalación con Docker
 
-Debe ubicarse en la raiz del proyecto y ejecutar el siguiente comando.
+Debe ubicarse en la raíz del proyecto y ejecutar el siguiente comando.
 ```bash
 $ docker-compose up
 ```
 
-### Referencia del servicio
+## Documentación del servicio
+
+Si deseas ver la documentación del servicio, puedes acceder a la siguiente url.
+
+```bash
+$ http://localhost:3000/api/v1/documentation
+```
+
+## Información de Referencia
 Se establece el prefijo /api/v1 identificar la versión del servicio sobre el dominio del servicio.
 
 La url para ejecutar el servicio:
