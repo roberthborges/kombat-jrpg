@@ -27,7 +27,7 @@ $ docker-compose up
 
 ## Documentación del servicio
 
-Si deseas ver la documentación del servicio, puedes acceder a la siguiente url.
+Una vez que el servicio este corriendo, se puede visualizar la documentación del mismo en la siguiente url.
 
 ```bash
 $ http://localhost:3000/api/v1/documentation

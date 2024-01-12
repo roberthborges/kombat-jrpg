@@ -18,12 +18,12 @@ export class BattlefieldController {
   })
   @ApiResponse({
     status: 400,
-    description: 'An error trace is displayed',
+    description: 'Bad request',
     type: BadRequestErrorDto,
   })
   @ApiResponse({
     status: 500,
-    description: 'An error trace is displayed',
+    description: 'Internal Server Error',
     type: InternalServerErrorDto,
   })
   @Post()
