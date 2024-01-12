@@ -1,10 +1,7 @@
-import { BattleRequestDto } from '../dto/battle-request.dto';
-import { Player } from '../dto/player.dto';
+import { BattlefieldDto } from '../dto/battlefield.dto';
 
-export abstract class Kombat {
-  abstract assignPlayerInformation(battleRequestDto: BattleRequestDto);
+export abstract class KombatAbstract {
+  abstract chooseOrderOfPlayers(battlefieldDto: BattlefieldDto);
 
-  abstract chooseOrderOfPlayers(battleRequestDto: BattleRequestDto);
-
-  abstract startCombat(player1: Player, player2: Player);
+  abstract startCombat(battlefieldDto: BattlefieldDto);
 }

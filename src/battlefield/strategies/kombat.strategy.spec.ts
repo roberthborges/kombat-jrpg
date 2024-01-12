@@ -1,6 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { KombatStrategy } from './kombat.strategy';
 import { BattlefieldService } from '../battlefield.service';
+import { Player } from '../dto/player.dto';
+import { BattlefieldDto } from '../dto/battlefield.dto';
 
 describe('KombatStrategy', () => {
   let service: KombatStrategy;
@@ -23,22 +25,22 @@ describe('KombatStrategy', () => {
         player1: {
           movimientos: ['SDD', 'DSD', 'SA', 'DSD'],
           golpes: ['K', 'P', 'K', 'P'],
-          quantityButtons: 8,
-          quantityMovements: 4,
-          quantityBangs: 4,
         },
         player2: {
           movimientos: ['DSD', 'WSAW', 'ASA', '', 'ASA', 'SA'],
           golpes: ['P', 'K', 'K', 'K', 'P', 'k'],
-          quantityButtons: 12,
-          quantityMovements: 6,
-          quantityBangs: 6,
         },
       };
-      const response = await service.chooseOrderOfPlayers(request);
-      expect(response[0].movimientos[0]).toEqual('SDD');
-      expect(response[0].movimientos[2]).toEqual('SA');
-      expect(response[0].golpes[3]).toEqual('P');
+      const player1 = new Player(request.player1, 'Tonyn', 'Stallone');
+      const player2 = new Player(request.player2, 'Arnaldor', 'Shuatseneguer');
+      const battlefieldDto: BattlefieldDto = {
+        player1,
+        player2,
+      };
+      const response = await service.chooseOrderOfPlayers(battlefieldDto);
+      expect(response[0].movements[0]).toEqual('SDD');
+      expect(response[0].movements[2]).toEqual('SA');
+      expect(response[0].bangs[3]).toEqual('P');
     });
 
     it('should be select player2 as the first player', async () => {
@@ -46,22 +48,22 @@ describe('KombatStrategy', () => {
         player1: {
           movimientos: ['DSD', 'WSAW', 'ASA', '', 'ASA', 'SA'],
           golpes: ['P', 'K', 'K', 'K', 'P', 'k'],
-          quantityButtons: 12,
-          quantityMovements: 6,
-          quantityBangs: 6,
         },
         player2: {
           movimientos: ['SDD', 'DSD', 'SA', 'DSD'],
           golpes: ['K', 'P', 'K', 'P'],
-          quantityButtons: 8,
-          quantityMovements: 4,
-          quantityBangs: 4,
         },
       };
-      const response = await service.chooseOrderOfPlayers(request);
-      expect(response[0].movimientos[1]).toEqual('DSD');
-      expect(response[0].movimientos[2]).toEqual('SA');
-      expect(response[0].golpes[0]).toEqual('K');
+      const player1 = new Player(request.player1, 'Tonyn', 'Stallone');
+      const player2 = new Player(request.player2, 'Arnaldor', 'Shuatseneguer');
+      const battlefieldDto: BattlefieldDto = {
+        player1,
+        player2,
+      };
+      const response = await service.chooseOrderOfPlayers(battlefieldDto);
+      expect(response[0].movements[1]).toEqual('DSD');
+      expect(response[0].movements[2]).toEqual('SA');
+      expect(response[0].bangs[0]).toEqual('K');
     });
 
     it('should be select player1 as the first player because movements quantity is equal to both players', async () => {
@@ -69,22 +71,22 @@ describe('KombatStrategy', () => {
         player1: {
           movimientos: ['DSD', 'WSAW', 'ASA', 'SA'],
           golpes: ['P', 'K', 'K', 'K'],
-          quantityButtons: 8,
-          quantityMovements: 4,
-          quantityBangs: 4,
         },
         player2: {
           movimientos: ['SDD', 'DSD', 'SA', 'DSD'],
           golpes: ['K', 'P', 'K', 'P'],
-          quantityButtons: 8,
-          quantityMovements: 4,
-          quantityBangs: 4,
         },
       };
-      const response = await service.chooseOrderOfPlayers(request);
-      expect(response[0].movimientos[1]).toEqual('WSAW');
-      expect(response[0].movimientos[2]).toEqual('ASA');
-      expect(response[0].golpes[0]).toEqual('P');
+      const player1 = new Player(request.player1, 'Tonyn', 'Stallone');
+      const player2 = new Player(request.player2, 'Arnaldor', 'Shuatseneguer');
+      const battlefieldDto: BattlefieldDto = {
+        player1,
+        player2,
+      };
+      const response = await service.chooseOrderOfPlayers(battlefieldDto);
+      expect(response[0].movements[1]).toEqual('WSAW');
+      expect(response[0].movements[2]).toEqual('ASA');
+      expect(response[0].bangs[0]).toEqual('P');
     });
   });
 });

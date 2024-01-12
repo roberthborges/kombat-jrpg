@@ -41,6 +41,6 @@ describe('BattlefieldController', () => {
     ];
     const response = await controller.startBattle(request);
 
-    expect(response.summary).toEqual(mockResponse);
+    expect(response.data).toEqual(mockResponse);
   });
 });

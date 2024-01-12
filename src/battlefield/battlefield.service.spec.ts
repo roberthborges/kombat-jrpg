@@ -31,8 +31,8 @@ describe('BattlefieldService', () => {
 
     const winner = 'Arnaldor ha ganado la pelea y aun le queda 3 de energia';
     const response = await service.battlefield(request);
-    const index = response.summary.length - 1;
+    const index = response.data.length - 1;
 
-    expect(winner).toEqual(response.summary[index]);
+    expect(winner).toEqual(response.data[index]);
   });
 });

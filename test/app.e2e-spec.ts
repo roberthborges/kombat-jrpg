@@ -18,7 +18,8 @@ describe('AppController (e2e)', () => {
   };
 
   const mockResponse = {
-    summary: [
+    statusCode: 200,
+    data: [
       'Tonyn se mueve y lanza una patada',
       'Arnaldor usa un Taladoken',
       'Tonyn usa un Taladoken',

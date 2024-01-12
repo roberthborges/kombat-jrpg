@@ -1,20 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { Player } from '../dto/player.dto';
-import { BattleRequestDto } from '../dto/battle-request.dto';
-import { Attributes } from '../enum/attributes.enum';
 import { movements } from '../constants/movements.constant';
-import { playerInformation } from '../constants/player-information';
 import { ResultMovement } from '../interfaces/result-movement.interface';
-import { Kombat } from '../interfaces/kombat-abstract.interface';
+import { KombatAbstract } from '../interfaces/kombat-abstract.interface';
+import { Player } from '../dto/player.dto';
+import { BattlefieldDto } from '../dto/battlefield.dto';
 
 @Injectable()
-export class KombatStrategy extends Kombat {
-  async startCombat(player1: Player, player2: Player): Promise<string[]> {
+export class KombatStrategy extends KombatAbstract {
+  async startCombat(battlefieldDto: BattlefieldDto): Promise<string[]> {
+    const { player1, player2 } = battlefieldDto;
     const summaryBattle: string[] = [];
     const iteratorMovements = Math.max(
-      player1.quantityButtons,
-      player2.quantityButtons,
+      player1.totalActions,
+      player2.totalActions,
     );
+
     for (let index = 0; index < iteratorMovements; index++) {
       // Make movement of player 01
       const { attacks: attacks1, rivalIsAlive: rivalIsAlive1 }: ResultMovement =
@@ -30,33 +30,22 @@ export class KombatStrategy extends Kombat {
     return summaryBattle;
   }
 
-  async assignPlayerInformation(battleRequestDto: BattleRequestDto) {
-    Object.entries(battleRequestDto).forEach(([key, value], index) => {
-      battleRequestDto[key] = {
-        ...value,
-        ...playerInformation[index],
-        quantityButtons:
-          value[Attributes.MOVEMENT].length + value[Attributes.BANG].length,
-        quantityMovements: value[Attributes.MOVEMENT].length,
-        quantityBangs: value[Attributes.BANG].length,
-      };
-    });
-  }
-
-  async chooseOrderOfPlayers(battleRequestDto: BattleRequestDto) {
-    const { player1, player2 } = battleRequestDto;
-    const chooseOne = { 0: player1, 1: player2 };
-    const chooseTwo = { 0: player2, 1: player1 };
+  async chooseOrderOfPlayers(
+    battlefieldDto: BattlefieldDto,
+  ): Promise<Player[]> {
+    const { player1, player2 } = battlefieldDto;
+    const chooseOne: Player[] = [player1, player2];
+    const chooseTwo: Player[] = [player2, player1];
     if (
-      player1.quantityButtons < player2.quantityButtons ||
-      player1.quantityMovements < player2.quantityMovements ||
-      player1.quantityBangs < player2.quantityBangs
+      player1.totalActions < player2.totalActions ||
+      player1.totalMovements < player2.totalMovements ||
+      player1.totalBangs < player2.totalBangs
     )
       return chooseOne;
     if (
-      player2.quantityButtons < player1.quantityButtons ||
-      player2.quantityMovements < player1.quantityMovements ||
-      player2.quantityBangs < player1.quantityBangs
+      player2.totalActions < player1.totalActions ||
+      player2.totalMovements < player1.totalMovements ||
+      player2.totalBangs < player1.totalBangs
     )
       return chooseTwo;
     return chooseOne;
@@ -68,8 +57,8 @@ export class KombatStrategy extends Kombat {
     index: number,
   ): Promise<ResultMovement> {
     const attacks: string[] = [];
-    const textMovement = player.movimientos[index] || undefined;
-    const textBang = player.golpes[index] || undefined;
+    const textMovement = player.movements[index] || undefined;
+    const textBang = player.bangs[index] || undefined;
     if (movements[textMovement + textBang]) {
       const { energy, description } = movements[textMovement + textBang];
       attacks.push(`${player.firstName} ${description}`);
