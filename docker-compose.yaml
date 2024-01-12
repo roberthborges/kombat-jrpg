@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  kombatjrpg:
+    depends_on:
+      - db
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: kombatjrpg-docker
+    container_name: kombatjrpg
+    restart: always
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      PORT: ${PORT}
