@@ -1,4 +1,4 @@
-export const movements = {
+export const actionsTranslate = {
   W: { energy: 0, name: 'Arriba', description: 'se mueve' },
   S: { energy: 0, name: 'Abajo', description: 'se mueve' },
   A: { energy: 0, name: 'Izquierda', description: 'retrocede' },

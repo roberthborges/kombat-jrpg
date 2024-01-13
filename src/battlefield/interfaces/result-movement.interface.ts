@@ -1,4 +1,4 @@
 export interface ResultMovement {
   attacks: string[];
-  rivalIsAlive: boolean;
+  isRivalAlive: boolean;
 }

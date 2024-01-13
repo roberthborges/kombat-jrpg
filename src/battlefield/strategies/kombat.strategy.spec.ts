@@ -3,6 +3,7 @@ import { KombatStrategy } from './kombat.strategy';
 import { BattlefieldService } from '../battlefield.service';
 import { Player } from '../dto/player.dto';
 import { BattlefieldDto } from '../dto/battlefield.dto';
+import { ResultMovement } from '../interfaces/result-movement.interface';
 
 describe('KombatStrategy', () => {
   let service: KombatStrategy;
@@ -88,5 +89,35 @@ describe('KombatStrategy', () => {
       expect(response[0].movements[2]).toEqual('ASA');
       expect(response[0].bangs[0]).toEqual('P');
     });
+  });
+
+  it('should be apply actions player only hits', async () => {
+    const request = {
+      player1: {
+        movimientos: [''],
+        golpes: ['P'],
+      },
+      player2: {
+        movimientos: ['SDD'],
+        golpes: ['K'],
+      },
+    };
+    const player1 = new Player(request.player1, 'Tonyn', 'Stallone');
+    const player2 = new Player(request.player2, 'Arnaldor', 'Shuatseneguer');
+    player2.energyPoints = 1;
+    const response: ResultMovement = await service.applyPlayerAction(
+      player1,
+      player2,
+      0,
+    );
+    expect(response.isRivalAlive).toBeFalsy();
+  });
+
+  it('Call KombatStrategy.startCombat service and receive a exception', async () => {
+    try {
+      await service.startCombat(undefined);
+    } catch (error) {
+      expect(error.message).toBe('InternalServerError check logs');
+    }
   });
 });

@@ -31,16 +31,19 @@ describe('BattlefieldController', () => {
       },
     };
 
-    const mockResponse = [
-      'Tonyn se mueve y lanza una patada',
-      'Arnaldor usa un Taladoken',
-      'Tonyn usa un Taladoken',
-      'Arnaldor se mueve y lanza una patada',
-      'Tonyn conecta un Remuyuken',
-      'Tonyn ha ganado la pelea y aun le queda 2 de energia',
-    ];
+    const mockResponse = {
+      statusCode: 200,
+      data: [
+        'Tonyn se mueve y lanza una patada',
+        'Arnaldor usa un Taladoken',
+        'Tonyn usa un Taladoken',
+        'Arnaldor se mueve y lanza una patada',
+        'Tonyn conecta un Remuyuken',
+        'Tonyn ha ganado la pelea y aun le queda 2 de energia',
+      ],
+    };
     const response = await controller.startBattle(request);
 
-    expect(response.data).toEqual(mockResponse);
+    expect(response).toEqual(mockResponse);
   });
 });
