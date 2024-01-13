@@ -12,6 +12,37 @@ Servicio para analizar el combate de dos personajes que se enfrentan a muerte. C
 
 El servicio se ha construido con el framework de NestJS + Typescript y dispone de una API REST que recibe la información de los personajes en formato JSON y genera una salida con  el resultado de la batalla indicando el ganado.
 
+## Información de los personajes
+
+Los botones que se usan para el juego de los personajes son:
+
+(W) Arriba, (S) Abajo, (A) Izquierda, (D) Derecha
+(P) Puño, (K) Patada
+
+```md
+|                       Tonyn Stallone                   |
+|  ----------------------------------------------------  |
+|  Combinación  | Energía que quita | Nombre movimiento  |
+|  -----------  |  ---------------  |  ----------------  |
+|   DSD + P     |        3          |   Taladoken        |
+|   SD + K      |        2          |   Remuyuken        |
+|   P o K       |        1          |   Puño o Patada    |
+|  ...........  |  ...............  |  ................  |
+
+```
+
+```md
+|                 Arnaldor Shuatseneguer                 |
+|  ----------------------------------------------------  |
+|  Combinación  | Energía que quita | Nombre movimiento  |
+|  -----------  |  ---------------  |  ----------------  |
+|   SA + K      |        3          |   Remuyuken        |
+|   ASA + P     |        2          |   Taladoken        |
+|   P o K       |        1          |   Puño o Patada    |
+|  ...........  |  ...............  |  ................  |
+
+```
+
 ## Requisitos previos
 
 Debes constar con una version de Docker disponible en el equipo para poder ejecutar el servicio a través de [Docker Compose](https://docs.docker.com/compose/install/).
